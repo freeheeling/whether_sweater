@@ -26,6 +26,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rack-cors'
 
 gem 'faraday'
+gem 'fast_jsonapi'
 gem 'figaro'
 
 group :development, :test do
@@ -38,7 +39,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'vcr'
-  # gem 'webmock'
+  gem 'webmock'
 end
 
 group :development do
