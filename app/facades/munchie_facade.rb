@@ -1,7 +1,8 @@
 class MunchieFacade
   attr_reader :id,
               :end_location,
-              :travel_time
+              :travel_time,
+              :forecast
 
   def initialize(origin, destination, cuisine)
     @id = nil
@@ -10,6 +11,8 @@ class MunchieFacade
     @cuisine = cuisine
     @end_location = route_data.first[:end_address]
     @travel_time = route_data.first[:duration][:text]
+    @forecast = weather_data
+    # @forecast = forecast_data[:hourly][:data].first[:summary]
   end
 
   def route_data
@@ -22,12 +25,16 @@ class MunchieFacade
     @forecast_data ||= DarkskyService.new(lat, long).darksky_data
   end
 
-  def forecast
-    Forecast.new(forecast_data)
+  def weather_data
+    seconds = ((route_data.first[:duration][:value].to_f)/3600).round
+    forecast_data
   end
 
   def restaurant
-
+    {
+      name: 'name',
+      address: 'address'
+    }
   end
 
   private
