@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.unsplash.com/search/photos?client_id=<unsplash_api_key>&per_page=1&query=denver,co%20skyline
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2911'
+      Server:
+      - Cowboy
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Request-Method:
+      - "*"
+      Access-Control-Allow-Headers:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining
+      Link:
+      - <https://api.unsplash.com/search/photos?client_id=<unsplash_api_key>&page=6336&per_page=1&query=denver%2Cco+skyline>;
+        rel="last", <https://api.unsplash.com/search/photos?client_id=<unsplash_api_key>&page=2&per_page=1&query=denver%2Cco+skyline>;
+        rel="next"
+      X-Total:
+      - '6336'
+      X-Per-Page:
+      - '1'
+      Content-Type:
+      - application/json
+      X-Ratelimit-Limit:
+      - '50'
+      X-Ratelimit-Remaining:
+      - '47'
+      X-Request-Id:
+      - f68be307-730a-4b05-afb6-9eaf21c9baa9
+      X-Runtime:
+      - '0.049950'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      - 1.1 vegur
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 01 Mar 2020 16:37:34 GMT
+      Age:
+      - '4481'
+      X-Served-By:
+      - cache-iad2147-IAD, cache-den19629-DEN
+      X-Cache:
+      - MISS, HIT
+      X-Cache-Hits:
+      - 0, 3
+      X-Timer:
+      - S1583080654.206076,VS0,VE0
+      Vary:
+      - Origin, Authorization
+    body:
+      encoding: UTF-8
+      string: '{"total":6336,"total_pages":6336,"results":[{"id":"pBtdIO99UIc","created_at":"2019-10-08T21:44:07-04:00","updated_at":"2020-02-07T00:02:42-05:00","promoted_at":null,"width":1944,"height":2592,"color":"#5EC0FF","description":"Colin
+        McIntosh sheetsgiggles.com","alt_description":"wide-angle photography of buildings
+        during daytime","urls":{"raw":"https://images.unsplash.com/photo-1570585429632-e8b74372a3ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjExMDE5MH0","full":"https://images.unsplash.com/photo-1570585429632-e8b74372a3ed?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjExMDE5MH0","regular":"https://images.unsplash.com/photo-1570585429632-e8b74372a3ed?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExMDE5MH0","small":"https://images.unsplash.com/photo-1570585429632-e8b74372a3ed?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjExMDE5MH0","thumb":"https://images.unsplash.com/photo-1570585429632-e8b74372a3ed?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjExMDE5MH0"},"links":{"self":"https://api.unsplash.com/photos/pBtdIO99UIc","html":"https://unsplash.com/photos/pBtdIO99UIc","download":"https://unsplash.com/photos/pBtdIO99UIc/download","download_location":"https://api.unsplash.com/photos/pBtdIO99UIc/download"},"categories":[],"likes":16,"liked_by_user":false,"current_user_collections":[],"user":{"id":"uCjRDd85Gm8","updated_at":"2020-02-25T16:01:37-05:00","username":"melissamullinator","name":"Melissa
+        Van Gogh","first_name":"Melissa","last_name":"Van Gogh","twitter_username":"thehealthymel","portfolio_url":"http://Thehealthymelissa.com","bio":"Tag
+        me on insta @thehealthymelissa","location":"Florida","links":{"self":"https://api.unsplash.com/users/melissamullinator","html":"https://unsplash.com/@melissamullinator","photos":"https://api.unsplash.com/users/melissamullinator/photos","likes":"https://api.unsplash.com/users/melissamullinator/likes","portfolio":"https://api.unsplash.com/users/melissamullinator/portfolio","following":"https://api.unsplash.com/users/melissamullinator/following","followers":"https://api.unsplash.com/users/melissamullinator/followers"},"profile_image":{"small":"https://images.unsplash.com/profile-1560520480097-c6b5d4435ac8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32","medium":"https://images.unsplash.com/profile-1560520480097-c6b5d4435ac8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64","large":"https://images.unsplash.com/profile-1560520480097-c6b5d4435ac8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128"},"instagram_username":"thehealthymelissa","total_collections":4,"total_likes":1157,"total_photos":108,"accepted_tos":true},"tags":[{"type":"search","title":"banister"},{"type":"search","title":"handrail"},{"type":"search","title":"office
+        building"}]}]}'
+    http_version: null
+  recorded_at: Sun, 01 Mar 2020 16:37:34 GMT
+recorded_with: VCR 5.1.0
