@@ -9,7 +9,7 @@ class MunchieFacade
   end
 
   def end_location
-
+    GoogleService.new(origin, destination)
   end
 
   def travel_time
