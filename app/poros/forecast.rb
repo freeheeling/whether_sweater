@@ -17,7 +17,9 @@ class Forecast
   end
 
   def daily_forecast(forecast_data)
-    DailyForecast.new(daily_data).next_five_days
+    daily_data[1..5].map do |day|
+      DailyForecast.new(day)
+    end
   end
 
   private

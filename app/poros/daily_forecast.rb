@@ -1,46 +1,23 @@
 class DailyForecast
-  def initialize(daily_weather_data)
-    @daily_data = daily_weather_data
-  end
+  attr_reader :day_of_week,
+              :weather_icon,
+              :precip_type,
+              :precip_probability_percent,
+              :high_temp_F,
+              :low_temp_F
 
-  def next_five_days
-    daily_data.map do |day|
-      {
-        day_of_week: day_full_name(day),
-        weather_icon: icon(day),
-        precip_type: precip_type(day),
-        precip_probability_percent: precip_prob(day),
-        high_temp_F: high_temp(day),
-        low_temp_F: low_temp(day)
-      }
-    end[1..5]
+  def initialize(day)
+    @day_of_week = day_full_name(day)
+    @weather_icon = day[:icon]
+    @precip_type = day[:precipType]
+    @precip_probability_percent = (day[:precipProbability] * 100).to_i
+    @high_temp_F = (day[:temperatureMax]).round
+    @low_temp_F = (day[:temperatureMin]).round
   end
 
   private
 
-  attr_reader :daily_data
-
   def day_full_name(day)
     Time.at(day[:time]).strftime('%A')
-  end
-
-  def icon(day)
-    day[:icon]
-  end
-
-  def precip_type(day)
-    day[:precipType]
-  end
-
-  def precip_prob(day)
-    (day[:precipProbability] * 100).to_i
-  end
-
-  def high_temp(day)
-    (day[:temperatureMax]).round
-  end
-
-  def low_temp(day)
-    (day[:temperatureMin]).round
   end
 end
