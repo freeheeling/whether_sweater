@@ -10,12 +10,14 @@ class Forecast
     CurrentWeather.new(forecast_data)
   end
 
-  def daily_forecast(forecast_data)
-    DailyForecast.new(daily_data).next_five_days
+  def hourly_forecast(forecast_data)
+    hourly_data[0..7].map do |hour|
+      HourlyForecast.new(hour)
+    end
   end
 
-  def hourly_forecast(forecast_data)
-    HourlyForecast.new(hourly_data).next_eight_hours
+  def daily_forecast(forecast_data)
+    DailyForecast.new(daily_data).next_five_days
   end
 
   private
