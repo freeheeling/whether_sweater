@@ -29,11 +29,18 @@ class MunchieFacade
     forecast_data[:hourly][:data][hours_to_arrive][:summary]
   end
 
-  def restaurant
+  def restaurant_data
+    lat = route_data.first[:end_location][:lat] # destination
+    long = route_data.first[:end_location][:lng] # destination
+    YelpService.new(lat, long, cuisine).business_from_term
 
+  end
+
+  def restaurant
+    address = restaurant_data[:businesses].first[:location]
     {
-      name: 'name',
-      address: 'address'
+      name: restaurant_data[:businesses].first[:name],
+      address: 'address[:address1] + ', ' + address[:address2] + ', ' + address[:city] + ', ' + address[:state] + address[:zip]"
     }
   end
 
