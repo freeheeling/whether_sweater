@@ -1,12 +1,13 @@
 class YelpService
-  def initialize(lat, long, cuisine)
+  def initialize(lat, long, cuisine, time)
     @lat = lat
     @long = long
     @cuisine = cuisine
+    @time = time
   end
 
   def business_from_term
-    get_json('business/search')
+    get_json('businesses/search')
   end
 
   private
@@ -20,6 +21,7 @@ class YelpService
       req.params['latitude'] = lat
       req.params['longitude'] = long
       req.params['term'] = cuisine
+      req.params['open_at'] = time
     end
     JSON.parse(response.body, symbolize_names: true)
   end

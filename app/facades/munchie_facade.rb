@@ -21,8 +21,6 @@ class MunchieFacade
   end
 
   def forecast_data
-    lat = route_data.first[:end_location][:lat] # destination
-    long = route_data.first[:end_location][:lng] # destination
     @forecast_data ||= DarkskyService.new(lat, long).darksky_data
   end
 
@@ -32,17 +30,18 @@ class MunchieFacade
   end
 
   def restaurant_data
-    lat = route_data.first[:end_location][:lat] # destination
-    long = route_data.first[:end_location][:lng] # destination
-    YelpService.new(lat, long, cuisine).business_from_term
-    require "pry"; binding.pry
+    current_time = Time.now.to_i
+    eta =
+    time =
+    YelpService.new(lat, long, cuisine, time).business_from_term[:businesses]
   end
 
   def restaurant_name_and_address
-    # address = restaurant_data[:businesses].first[:location]
+    address = restaurant_data.first[:location]
+    require "pry"; binding.pry
     {
-      name: restaurant_data[:businesses].first[:name]
-      # address: 'address[:address1] + ', ' + address[:address2] + ', ' + address[:city] + ', ' + address[:state] + address[:zip]"
+      name: restaurant_data.first[:name],
+      address: address[:address1] + ', ' + address[:city] + ', ' + address[:state] + ' ' + address[:zip_code]
     }
   end
 
@@ -51,4 +50,12 @@ class MunchieFacade
   attr_reader :origin,
               :destination,
               :cuisine
+
+  def lat
+    route_data.first[:end_location][:lat] # destination
+  end
+
+  def long
+    long = route_data.first[:end_location][:lng] # destination
+  end
 end
