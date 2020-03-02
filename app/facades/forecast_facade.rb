@@ -18,7 +18,7 @@ class ForecastFacade
 
   def search_location
     address_components = geolocation_data[:address_components]
-    PoliticalBoundary.new(address_components).city_state_country
+    PoliticalBoundary.new(address_components)
   end
 
   def forecast
