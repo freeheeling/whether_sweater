@@ -1,4 +1,4 @@
-class GeocodeService
+class GoogleService
   def initialize(location)
     @location = location
   end
@@ -22,7 +22,7 @@ class GeocodeService
   def conn
     Faraday.new('https://maps.googleapis.com/maps/api') do |f|
       f.adapter Faraday.default_adapter
-      f.params['key'] = ENV['geocode_api_key']
+      f.params['key'] = ENV['google_api_key']
     end
   end
 end

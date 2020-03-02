@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe GeocodeService do
+describe GoogleService do
   context 'instance methods' do
     context '#geocode_data' do
       it 'returns geolocation data', :vcr do
-        search = GeocodeService.new('denver,co').geocode_data
+        search = GoogleService.new('denver,co').geocode_data
 
         expect(search).to be_instance_of(Hash)
 

@@ -6,7 +6,7 @@ class DailyForecast
   def next_five_days
     daily_data.map do |day|
       {
-        day_of_week: full_day_name(day),
+        day_of_week: day_full_name(day),
         weather_icon: icon(day),
         precip_type: precip_type(day),
         precip_probability_percent: precip_prob(day),
@@ -20,7 +20,7 @@ class DailyForecast
 
   attr_reader :daily_data
 
-  def full_day_name(day)
+  def day_full_name(day)
     Time.at(day[:time]).strftime('%A')
   end
 

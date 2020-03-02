@@ -7,7 +7,7 @@ class ForecastFacade
   end
 
   def geolocation_data
-    @geolocation_data ||= GeocodeService.new(location).geocode_data
+    @geolocation_data ||= GoogleService.new(location).geocode_data
   end
 
   def forecast_data

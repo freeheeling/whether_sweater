@@ -7,7 +7,7 @@ class Forecast
   end
 
   def current_weather(forecast_data)
-    CurrentWeather.new(forecast_data).current_conditions
+    CurrentWeather.new(forecast_data)
   end
 
   def daily_forecast(forecast_data)
