@@ -6,7 +6,7 @@ describe 'Munchies API endpoint' do
 
     expect(response).to be_successful
 
-    response_data = JSON.parse(resopnse.body, symbolize_names: true)
+    response_data = JSON.parse(response.body, symbolize_names: true)
 
     expect(response_data[:data]).to have_key(:munchie)
 
@@ -19,3 +19,19 @@ describe 'Munchies API endpoint' do
     expect(response_data[:attributes][:restaurant]).to have_key(:address)
   end
 end
+
+# {
+#   "data": {
+#     "id": "null",
+#     "type": "munchie",
+#     "attributes": {
+#       "end_location": "Pueblo, CO",
+#       "travel_time": "1 hours 48 min",
+#       "forecast": "Cloudy with a chance of meatballs"
+#       "restaurant": {
+#         "name": "Chinese Restaurant",
+#         "address": "4602 N. Elizabeth St, Ste 120, Pueblo, CO 81008"
+#       }
+#     }
+#   }
+# }
