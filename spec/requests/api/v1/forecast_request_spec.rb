@@ -1,9 +1,26 @@
 require 'rails_helper'
 
 describe 'Forecast API' do
-  it 'can retrieve weather for a city' do
+  it 'can return weather for a location', :vcr do
+    WebMock.enable_net_connect!
+    VCR.eject_cassette
+    VCR.turn_off!(ignore_cassettes: true)
+
     get '/api/v1/forecast?location=denver,co'
 
     expect(response).to be_successful
+
+    weather_data = JSON.parse(response.body, symbolize_names: true)
+
+    expect(weather_data[:data][:attributes]).to have_key(:search_location)
+    expect(weather_data[:data][:attributes]).to have_key(:forecast)
+
+    expect(weather_data[:data][:attributes][:forecast]).to have_key(:current_weather)
+
+    expect(weather_data[:data][:attributes][:forecast]).to have_key(:daily_forecast)
+    expect(weather_data[:data][:attributes][:forecast][:daily_forecast].size).to eq(5)
+
+    expect(weather_data[:data][:attributes][:forecast]).to have_key(:hourly_forecast)
+    expect(weather_data[:data][:attributes][:forecast][:hourly_forecast].size).to eq(8)
   end
 end
