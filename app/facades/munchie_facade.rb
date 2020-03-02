@@ -8,12 +8,16 @@ class MunchieFacade
     @cuisine = cuisine
   end
 
+  def route_data
+    @route_data ||= GoogleService.new(origin, destination).directions_data
+  end
+
   def end_location
-    GoogleService.new(origin, destination)
+    route_data.first[:end_address]
   end
 
   def travel_time
-
+    route_data.first[:duration][:text]
   end
 
   def forecast

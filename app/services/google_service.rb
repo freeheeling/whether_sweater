@@ -8,21 +8,22 @@ class GoogleService
     @geocode_data ||= get_json_address('geocode/json')
   end
 
-
+  def directions_data
+    @directions_data ||= get_json_directions('directions/json')
+  end
 
   private
 
   attr_reader :location,
               :destination
 
-  def get_json_direcations(url)
+  def get_json_directions(url)
     response = conn.get(url) do |req|
       req.params['origin'] = location
       req.params['destination'] = destination
     end
 
-    JSON.parse(response.body, symbolize_names: true)[:results].first
-    require "pry"; binding.pry
+    JSON.parse(response.body, symbolize_names: true)[:routes].first[:legs]
   end
 
 
