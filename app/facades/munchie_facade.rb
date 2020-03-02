@@ -11,8 +11,7 @@ class MunchieFacade
     @cuisine = cuisine
     @end_location = route_data.first[:end_address]
     @travel_time = route_data.first[:duration][:text]
-    @forecast = weather_data
-    # @forecast = forecast_data[:hourly][:data].first[:summary]
+    @forecast = weather_upon_arrival
   end
 
   def route_data
@@ -25,12 +24,13 @@ class MunchieFacade
     @forecast_data ||= DarkskyService.new(lat, long).darksky_data
   end
 
-  def weather_data
-    seconds = ((route_data.first[:duration][:value].to_f)/3600).round
-    forecast_data
+  def weather_upon_arrival
+    hours_to_arrive = ((route_data.first[:duration][:value].to_f)/3600).round
+    forecast_data[:hourly][:data][hours_to_arrive][:summary]
   end
 
   def restaurant
+
     {
       name: 'name',
       address: 'address'
