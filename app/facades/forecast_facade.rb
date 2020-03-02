@@ -4,10 +4,11 @@ class ForecastFacade
   def initialize(location)
     @id = nil
     @location = location
+    @destination = destination
   end
 
   def geolocation_data
-    @geolocation_data ||= GoogleService.new(location).geocode_data
+    @geolocation_data ||= GoogleService.new(location, destination).geocode_data
   end
 
   def forecast_data
@@ -27,5 +28,6 @@ class ForecastFacade
 
   private
 
-  attr_reader :location
+  attr_reader :location,
+              :destination
 end
