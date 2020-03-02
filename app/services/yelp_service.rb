@@ -5,14 +5,15 @@ class YelpService
     @cuisine = cuisine
   end
 
-  def buinsess_from_term
+  def business_from_term
     get_json('business/search')
   end
 
   private
 
   attr_reader :lat,
-              :long
+              :long,
+              :cuisine
 
   def get_json(url)
     response = conn.get(url) do |req|

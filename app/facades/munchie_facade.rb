@@ -2,7 +2,8 @@ class MunchieFacade
   attr_reader :id,
               :end_location,
               :travel_time,
-              :forecast
+              :forecast,
+              :restaurant
 
   def initialize(origin, destination, cuisine)
     @id = nil
@@ -12,6 +13,7 @@ class MunchieFacade
     @end_location = route_data.first[:end_address]
     @travel_time = route_data.first[:duration][:text]
     @forecast = weather_upon_arrival
+    @restaurant = restaurant_name_and_address
   end
 
   def route_data
@@ -33,14 +35,14 @@ class MunchieFacade
     lat = route_data.first[:end_location][:lat] # destination
     long = route_data.first[:end_location][:lng] # destination
     YelpService.new(lat, long, cuisine).business_from_term
-
+    require "pry"; binding.pry
   end
 
-  def restaurant
-    address = restaurant_data[:businesses].first[:location]
+  def restaurant_name_and_address
+    # address = restaurant_data[:businesses].first[:location]
     {
-      name: restaurant_data[:businesses].first[:name],
-      address: 'address[:address1] + ', ' + address[:address2] + ', ' + address[:city] + ', ' + address[:state] + address[:zip]"
+      name: restaurant_data[:businesses].first[:name]
+      # address: 'address[:address1] + ', ' + address[:address2] + ', ' + address[:city] + ', ' + address[:state] + address[:zip]"
     }
   end
 
