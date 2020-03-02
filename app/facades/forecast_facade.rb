@@ -11,14 +11,11 @@ class ForecastFacade
   end
 
   def forecast_data
-    lat = geolocation_data[:geometry][:location][:lat]
-    long = geolocation_data[:geometry][:location][:lng]
     @forecast_data ||= DarkskyService.new(lat, long).darksky_data
   end
 
   def search_location
-    address_components = geolocation_data[:address_components]
-    PoliticalBoundary.new(address_components).city_state_country
+    PoliticalBoundary.new(address_components)
   end
 
   def forecast
@@ -28,4 +25,16 @@ class ForecastFacade
   private
 
   attr_reader :location
+
+  def lat
+    geolocation_data[:geometry][:location][:lat]
+  end
+
+  def long
+    geolocation_data[:geometry][:location][:lng]
+  end
+
+  def address_components
+    geolocation_data[:address_components]
+  end
 end
