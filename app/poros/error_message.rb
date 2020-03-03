@@ -10,6 +10,10 @@ class ErrorMessage
     user.errors
   end
 
+  def invalid_credentials
+    'Invalid email or password'
+  end
+
   private
 
   attr_reader :user
