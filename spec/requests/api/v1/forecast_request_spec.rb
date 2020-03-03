@@ -7,17 +7,17 @@ describe 'Forecast API' do
 
     expect(response).to be_successful
 
-    weather_data = JSON.parse(response.body, symbolize_names: true)
+    parsed_json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(weather_data[:data][:attributes]).to have_key(:search_location)
-    expect(weather_data[:data][:attributes]).to have_key(:forecast)
+    expect(parsed_json[:data][:attributes]).to have_key(:search_location)
+    expect(parsed_json[:data][:attributes]).to have_key(:forecast)
 
-    expect(weather_data[:data][:attributes][:forecast]).to have_key(:current_weather)
+    expect(parsed_json[:data][:attributes][:forecast]).to have_key(:current_weather)
 
-    expect(weather_data[:data][:attributes][:forecast]).to have_key(:daily_forecast)
-    expect(weather_data[:data][:attributes][:forecast][:daily_forecast].size).to eq(5)
+    expect(parsed_json[:data][:attributes][:forecast]).to have_key(:daily_forecast)
+    expect(parsed_json[:data][:attributes][:forecast][:daily_forecast].size).to eq(5)
 
-    expect(weather_data[:data][:attributes][:forecast]).to have_key(:hourly_forecast)
-    expect(weather_data[:data][:attributes][:forecast][:hourly_forecast].size).to eq(8)
+    expect(parsed_json[:data][:attributes][:forecast]).to have_key(:hourly_forecast)
+    expect(parsed_json[:data][:attributes][:forecast][:hourly_forecast].size).to eq(8)
   end
 end
