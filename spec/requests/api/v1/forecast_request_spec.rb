@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Forecast API' do
   it 'can return weather for a location', :vcr do
+    headers = { CONTENT_TYPE: 'application/json', ACCEPT: 'application/json' }
     get '/api/v1/forecast?location=denver,co'
 
     expect(response).to be_successful
