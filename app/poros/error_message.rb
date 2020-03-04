@@ -14,6 +14,10 @@ class ErrorMessage
     'Invalid email or password'
   end
 
+  def invalid_key
+    'Unauthorized'
+  end
+
   private
 
   attr_reader :user

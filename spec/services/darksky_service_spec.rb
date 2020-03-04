@@ -6,7 +6,8 @@ describe DarkskyService do
       it 'returns weather data', :vcr do
         lat = '39.7392358'
         long = '-104.990251'
-        search = DarkskyService.new(lat, long).darksky_data
+        future_time = '1583280695'
+        search = DarkskyService.new(lat, long, future_time).darksky_data
 
         expect(search).to be_instance_of(Hash)
 
@@ -32,6 +33,20 @@ describe DarkskyService do
         expect(search[:hourly][:data][0]).to have_key(:icon)
         expect(search[:hourly][:data][0]).to have_key(:time)
         expect(search[:hourly][:data][0]).to have_key(:temperature)
+      end
+    end
+
+    context '#future_darksky_data' do
+      it 'returns weather data', :vcr do
+        lat = '39.7392358'
+        long = '-104.990251'
+        future_time = '1583280695'
+        search = DarkskyService.new(lat, long, future_time).future_darksky_data
+
+        expect(search).to be_instance_of(Hash)
+
+        expect(search[:currently]).to have_key(:summary)
+        expect(search[:currently]).to have_key(:temperature)
       end
     end
   end
