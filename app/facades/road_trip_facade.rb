@@ -8,9 +8,9 @@ class RoadTripFacade
     @id = id
     @start_location = start_location
     @end_location = end_location
-    @origin = route_data[:start_address].gsub( /.{5}$/, '' )
-    @destination = route_data[:end_address].gsub( /.{5}$/, '' )
-    @travel_time = route_data[:duration][:text]
+    @origin = get_origin
+    @destination = get_destination
+    @travel_time = get_travel_time
   end
 
   def route_data
@@ -18,8 +18,8 @@ class RoadTripFacade
   end
 
   def arrival_forecast
-    summary = RoadTripForecast.new(lat, long, future_time).future_summary
-    temp = RoadTripForecast.new(lat, long, future_time).future_temp
+    summary = road_trip_data.future_summary
+    temp = road_trip_data.future_temp
     "#{temp}°, #{summary}"
   end
 
@@ -38,7 +38,23 @@ class RoadTripFacade
     route_data[:end_location][:lng]
   end
 
+  def road_trip_data
+    RoadTripForecast.new(lat, long, future_time)
+  end
+
   def future_time
     Time.now.to_i + route_data[:duration][:value]
+  end
+
+  def get_origin
+    route_data[:start_address].gsub( /.{5}$/, '' )
+  end
+
+  def get_destination
+    route_data[:end_address].gsub( /.{5}$/, '' )
+  end
+
+  def get_travel_time
+    route_data[:duration][:text]
   end
 end
