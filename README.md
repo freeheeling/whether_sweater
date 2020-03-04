@@ -24,7 +24,7 @@ The [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) is
 
 ## Database Composition
 
-The database is comprised of a single resource type – Users – whose attributes are depicted by the following Active Designer-generated schema.
+The database is comprised of a single resource type – Users – whose attributes are depicted by the following visual schema.
 
 ![schema](https://user-images.githubusercontent.com/50811220/75908595-ab4db500-5e07-11ea-840d-caa7dd9bd21d.png)
 
