@@ -17,11 +17,11 @@ class DarkskyService
     darksky_data[:currently]
   end
 
-  def daily_weather
+  def daily_forecast
     darksky_data[:daily]
   end
 
-  def hourly_weather
+  def hourly_forecast
     darksky_data[:hourly]
   end
 

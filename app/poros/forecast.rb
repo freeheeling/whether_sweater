@@ -1,6 +1,5 @@
 class Forecast
   def initialize(forecast_data)
-    @forecast_data = forecast_data
     @current_weather = current_weather(forecast_data)
     @daily_forecast = daily_forecast(forecast_data)
     @hourly_forecast = hourly_forecast(forecast_data)
@@ -11,13 +10,13 @@ class Forecast
   end
 
   def hourly_forecast(forecast_data)
-    hourly_data[0..7].map do |hour|
+    hourly_data(forecast_data)[0..7].map do |hour|
       HourlyForecast.new(hour)
     end
   end
 
   def daily_forecast(forecast_data)
-    daily_data[1..5].map do |day|
+    daily_data(forecast_data)[1..5].map do |day|
       DailyForecast.new(day)
     end
   end
@@ -26,11 +25,11 @@ class Forecast
 
   attr_reader :forecast_data
 
-  def daily_data
+  def daily_data(forecast_data)
     forecast_data[:daily][:data]
   end
 
-  def hourly_data
+  def hourly_data(forecast_data)
     forecast_data[:hourly][:data]
   end
 end
