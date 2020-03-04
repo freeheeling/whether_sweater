@@ -2,8 +2,7 @@ class RoadTripFacade
   attr_reader :id,
               :origin,
               :destination,
-              :travel_time,
-              :arrival_forecast
+              :travel_time
 
   def initialize(start_location, end_location)
     @id = id
@@ -12,15 +11,16 @@ class RoadTripFacade
     @origin = route_data[:start_address].gsub( /.{5}$/, '' )
     @destination = route_data[:end_address].gsub( /.{5}$/, '' )
     @travel_time = route_data[:duration][:text]
-    @arrival_forecast = "#{future_temp}°, #{future_forecast}"
   end
 
   def route_data
     @route_data ||= GoogleService.new(start_location, end_location).directions_data
   end
 
-  def future_forecast_data
-    @future_forecast_data ||= DarkskyService.new(lat, long, future_time).future_darksky_data
+  def arrival_forecast
+    summary = RoadTripForecast.new(lat, long, future_time).future_summary
+    temp = RoadTripForecast.new(lat, long, future_time).future_temp
+    "#{temp}°, #{summary}"
   end
 
   private
@@ -40,13 +40,5 @@ class RoadTripFacade
 
   def future_time
     Time.now.to_i + route_data[:duration][:value]
-  end
-
-  def future_temp
-    future_forecast_data[:currently][:temperature].round
-  end
-
-  def future_forecast
-    future_forecast_data[:currently][:summary]
   end
 end
