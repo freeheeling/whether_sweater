@@ -5,7 +5,7 @@ class Api::V1::RoadTripsController < ApplicationController
       road_trip_data = RoadTripFacade.new(origin, destination)
       render json: RoadTripSerializer.new(road_trip_data)
     else
-      unsuccessful = ErrorMessage.new(user)
+      unsuccessful = UserErrorMessage.new(user)
       render json: InvalidKeySerializer.new(unsuccessful), status: 401
     end
   end

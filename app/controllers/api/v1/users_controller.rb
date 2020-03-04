@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: SuccessfulRegistrationSerializer.new(user), status: 201
     else
-      unsuccessful = ErrorMessage.new(user)
+      unsuccessful = UserErrorMessage.new(user)
       render json: FailedRegistrationSerializer.new(unsuccessful), status: 400
     end
   end

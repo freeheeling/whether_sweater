@@ -9,8 +9,6 @@ describe 'Road Trip API endpoint' do
                password_confirmation: 'password'
             )
 
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-
       headers = { CONTENT_TYPE: 'application/json', ACCEPT: 'application/json' }
       params = {
         origin: 'Denver,CO',
@@ -38,8 +36,6 @@ describe 'Road Trip API endpoint' do
                password: 'password',
                password_confirmation: 'password'
             )
-
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       headers = { CONTENT_TYPE: 'application/json', ACCEPT: 'application/json' }
       params = {

@@ -4,7 +4,7 @@ class Api::V1::SessionsController < ApplicationController
     if user && user.authenticate(user_params[:password])
       render json: SuccessfulLoginSerializer.new(user), status: 200
     else
-      unsuccessful = ErrorMessage.new(user)
+      unsuccessful = UserErrorMessage.new(user)
       render json: FailedLoginSerializer.new(unsuccessful), status: 401
     end
   end

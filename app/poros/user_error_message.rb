@@ -1,4 +1,4 @@
-class ErrorMessage
+class UserErrorMessage
   attr_reader :id
 
   def initialize(user)
