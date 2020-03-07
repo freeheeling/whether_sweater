@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.yelp.com/v3/businesses/search?latitude=38.2542053&longitude=104.6087488&open_at=1583560000&term=bagel
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer UyeZt0rYVfNci1cK1ZAb0ElrF9Xelo23j_N878I5V2h8NP_BdYo4iOWkZtk38XIaSR2iETrDrwU_SlpjzCUsobL1O_m879hcLEVhNLqSBcHeKQmk1sWjNM0-XnFcXnYx
+      User-Agent:
+      - Faraday v1.0.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Content-Type:
+      - application/json
+      X-Routing-Service:
+      - 10-69-129-102-uswest2bprod; site=public_api_v3
+      Ratelimit-Remaining:
+      - '4918'
+      X-B3-Sampled:
+      - '0'
+      X-Zipkin-Id:
+      - e4260c6974be182a
+      Ratelimit-Resettime:
+      - '2020-03-08T00:00:00+00:00'
+      Ratelimit-Dailylimit:
+      - '5000'
+      X-Proxied:
+      - 10-69-152-92-uswest2bprod
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 07 Mar 2020 13:48:59 GMT
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-den19640-DEN
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"businesses": [{"id": "GliNtDh9M67c-YlFVXsYHw", "alias": "starbucks-pueblo-5",
+        "name": "Starbucks", "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/fFCjd2uQQi940DB0LnfTrg/o.jpg",
+        "is_closed": false, "url": "https://www.yelp.com/biz/starbucks-pueblo-5?adjust_creative=ZIAQZTGiYiEPWGq58khorA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ZIAQZTGiYiEPWGq58khorA",
+        "review_count": 7, "categories": [{"alias": "coffee", "title": "Coffee & Tea"}],
+        "rating": 3.5, "coordinates": {"latitude": 38.310624, "longitude": -104.627315},
+        "transactions": [], "price": "$", "location": {"address1": "1565 Highway 50
+        W", "address2": "B-2", "address3": "", "city": "Pueblo", "zip_code": "81008",
+        "country": "US", "state": "CO", "display_address": ["1565 Highway 50 W", "B-2",
+        "Pueblo, CO 81008"]}, "phone": "+17192960300", "display_phone": "(719) 296-0300",
+        "distance": 6479.4352191151465}], "total": 1, "region": {"center": {"longitude":
+        104.6087488, "latitude": 38.2542053}}}'
+    http_version: null
+  recorded_at: Sat, 07 Mar 2020 13:48:59 GMT
+recorded_with: VCR 5.1.0
