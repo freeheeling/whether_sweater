@@ -1,12 +1,22 @@
 class ForecastFacade
-  attr_reader :id
+  attr_reader :id,
+              :search_location,
+              :forecast
 
   def initialize(location)
     @id = nil
     @location = location
     @destination = destination
     @future_time = future_time
+    @search_location = get_search_location
+    @forecast = get_forecast
   end
+
+  private
+
+  attr_reader :location,
+              :destination,
+              :future_time
 
   def geolocation_data
     @geolocation_data ||= GoogleService.new(location, destination).geocode_data
@@ -16,19 +26,13 @@ class ForecastFacade
     @forecast_data ||= DarkskyService.new(lat, long, future_time).darksky_data
   end
 
-  def search_location
+  def get_search_location
     PoliticalBoundary.new(address_components)
   end
 
-  def forecast
+  def get_forecast
     Forecast.new(forecast_data)
   end
-
-  private
-
-  attr_reader :location,
-              :destination,
-              :future_time
 
   def lat
     geolocation_data[:geometry][:location][:lat]

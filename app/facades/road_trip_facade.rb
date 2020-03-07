@@ -2,7 +2,8 @@ class RoadTripFacade
   attr_reader :id,
               :origin,
               :destination,
-              :travel_time
+              :travel_time,
+              :arrival_forecast
 
   def initialize(start_location, end_location)
     @id = id
@@ -11,24 +12,17 @@ class RoadTripFacade
     @origin = get_origin
     @destination = get_destination
     @travel_time = get_travel_time
-  end
-
-  def route_data
-    @route_data ||= GoogleService.new(start_location, end_location).directions_data
-  end
-
-  def arrival_forecast
-    summary = road_trip_data.future_summary
-    temp = road_trip_data.future_temp
-    "#{temp}°, #{summary}"
+    @arrival_forecast = get_arrival_forecast
   end
 
   private
 
   attr_reader :start_location,
-              :end_location,
-              :future_temp,
-              :future_forecast
+              :end_location
+
+  def route_data
+    @route_data ||= GoogleService.new(start_location, end_location).directions_data
+  end
 
   def lat
     route_data[:end_location][:lat]
@@ -56,5 +50,11 @@ class RoadTripFacade
 
   def get_travel_time
     route_data[:duration][:text]
+  end
+
+  def get_arrival_forecast
+    summary = road_trip_data.future_summary
+    temp = road_trip_data.future_temp
+    "#{temp}°, #{summary}"
   end
 end
