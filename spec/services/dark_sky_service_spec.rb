@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DarkskyService do
+describe DarkSkyService do
   context 'instance methods' do
     context '#darksky_data' do
       it 'returns weather data', :vcr do
@@ -8,7 +8,7 @@ describe DarkskyService do
         long = '-104.990251'
         future_time = '1583280695'
 
-        search = DarkskyService.new(lat, long, future_time).darksky_data
+        search = DarkSkyService.new(lat, long, future_time).darksky_data
 
         expect(search).to be_instance_of(Hash)
 
@@ -24,7 +24,7 @@ describe DarkskyService do
         long = '-104.990251'
         future_time = '1583280695'
 
-        search = DarkskyService.new(lat, long, future_time).future_darksky_data
+        search = DarkSkyService.new(lat, long, future_time).future_darksky_data
 
         expect(search).to be_instance_of(Hash)
 
@@ -39,7 +39,7 @@ describe DarkskyService do
         long = '-104.990251'
         future_time = '1583280695'
 
-        search = DarkskyService.new(lat, long, future_time).current_weather
+        search = DarkSkyService.new(lat, long, future_time).current_weather
 
         expect(search).to be_instance_of(Hash)
 
@@ -57,7 +57,7 @@ describe DarkskyService do
         long = '-104.990251'
         future_time = '1583280695'
 
-        search = DarkskyService.new(lat, long, future_time).daily_forecast
+        search = DarkSkyService.new(lat, long, future_time).daily_forecast
 
         expect(search).to be_instance_of(Hash)
 
@@ -76,7 +76,7 @@ describe DarkskyService do
         long = '-104.990251'
         future_time = '1583280695'
 
-        search = DarkskyService.new(lat, long, future_time).hourly_forecast
+        search = DarkSkyService.new(lat, long, future_time).hourly_forecast
 
         expect(search).to be_instance_of(Hash)
 

@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.yelp.com/v3/businesses/search?latitude=38.2542053&longitude=104.6087488&open_at=1583560000&term=chinese
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer UyeZt0rYVfNci1cK1ZAb0ElrF9Xelo23j_N878I5V2h8NP_BdYo4iOWkZtk38XIaSR2iETrDrwU_SlpjzCUsobL1O_m879hcLEVhNLqSBcHeKQmk1sWjNM0-XnFcXnYx
+      User-Agent:
+      - Faraday v1.0.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Content-Type:
+      - application/json
+      X-Routing-Service:
+      - 10-69-117-85-uswest2aprod; site=public_api_v3
+      Ratelimit-Remaining:
+      - '4917'
+      X-B3-Sampled:
+      - '0'
+      X-Zipkin-Id:
+      - 6d8ca1d32d3021c8
+      Ratelimit-Resettime:
+      - '2020-03-08T00:00:00+00:00'
+      Ratelimit-Dailylimit:
+      - '5000'
+      X-Proxied:
+      - 10-69-140-124-uswest2bprod
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 07 Mar 2020 13:49:00 GMT
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-den19634-DEN
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"businesses": [], "total": 0, "region": {"center": {"longitude": 104.6087488,
+        "latitude": 38.2542053}}}'
+    http_version: null
+  recorded_at: Sat, 07 Mar 2020 13:49:00 GMT
+recorded_with: VCR 5.1.0

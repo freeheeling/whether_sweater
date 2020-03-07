@@ -2,8 +2,8 @@ class Api::V1::RoadTripsController < ApplicationController
   def create
     user = User.find_by(api_key: request_params[:api_key])
     if user
-      road_trip_data = RoadTripFacade.new(origin, destination)
-      render json: RoadTripSerializer.new(road_trip_data)
+      road_trip = RoadTripFacade.new(origin, destination)
+      render json: RoadTripSerializer.new(road_trip)
     else
       unsuccessful = UserErrorMessage.new(user)
       render json: InvalidKeySerializer.new(unsuccessful), status: 401
