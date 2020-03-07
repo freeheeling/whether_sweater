@@ -10,10 +10,18 @@ class Restaurant
   private
 
   def get_name(restaurant_data)
-    restaurant_data.first[:name]
+    if restaurant_data.first == nil
+      'No records found matching search term'
+    else
+      restaurant_data.first[:name]
+    end
   end
 
   def get_address(restaurant_data)
-    restaurant_data.first[:location][:display_address].join(', ')
+    if restaurant_data.first == nil
+      'No records found matching search term'
+    else
+      restaurant_data.first[:location][:display_address].join(', ')
+    end
   end
 end
