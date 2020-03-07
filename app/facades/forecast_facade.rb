@@ -23,7 +23,7 @@ class ForecastFacade
   end
 
   def forecast_data
-    @forecast_data ||= DarkskyService.new(lat, long, future_time).darksky_data
+    @forecast_data ||= DarkSkyService.new(lat, long, future_time).darksky_data
   end
 
   def get_search_location

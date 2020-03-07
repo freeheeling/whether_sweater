@@ -40,7 +40,7 @@ class MunchieFacade
   end
 
   def forecast_data
-    DarkskyService.new(lat, long, arrival_time).future_darksky_data
+    DarkSkyService.new(lat, long, arrival_time).future_darksky_data
   end
 
   def get_weather_upon_arrival

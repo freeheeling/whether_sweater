@@ -6,7 +6,7 @@ class RoadTripForecast
   end
 
   def future_forecast_data
-    @future_forecast_data ||= DarkskyService.new(lat, long, future_time).future_darksky_data
+    @future_forecast_data ||= DarkSkyService.new(lat, long, future_time).future_darksky_data
   end
 
   def future_summary

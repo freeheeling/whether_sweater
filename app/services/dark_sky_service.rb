@@ -1,4 +1,4 @@
-class DarkskyService
+class DarkSkyService
   def initialize(lat, long, future_time)
     @lat = lat
     @long = long
