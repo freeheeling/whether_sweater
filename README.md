@@ -3,7 +3,7 @@
 ## Project Description
 Based on the premises of being a back-end developer working on a team that is building an application to plan road trips, this app allows users to view the current and forecasted weather at a destination.
 
-The Heroku-hosted [Sweater Wether Service](https://sweater-weather-service.herokuapp.com/) app utilizes the Ruby on Rails framework and [Fast JSON API](https://github.com/Netflix/fast_jsonapi) gem to expose aggregated data from multiple external APIs via a web-based API. [Project requirements](https://backend.turing.io/module3/projects/sweater_weather/requirements) provide an overview of the app's wireframes.
+The Heroku-hosted [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) app utilizes the Ruby on Rails framework and [Fast JSON API](https://github.com/Netflix/fast_jsonapi) gem to expose aggregated data from multiple external APIs via a web-based API. [Project requirements](https://backend.turing.io/module3/projects/sweater_weather/requirements) provide an overview of the app's wireframes.
 
 ## Features
 - Exposes an API that aggregates data from multiple external APIs
@@ -256,4 +256,4 @@ $ bundle exec rspec <path-to-file>
 ```
 ### Refreshing VCR Test Cassettes
 
-Errors will occassionally occur when testing with VCR. To refresh the cassettes being used, delete the cassettes directory within the spec folder and run `bundle exec rspec`. Reference the [VCR documentation](https://github.com/vcr/vcr) for more information pertaining to VCR cassettes.
+Errors will occasionally occur when testing with VCR. To refresh the cassettes being used, delete the cassettes directory within the spec folder and run `bundle exec rspec`. Reference the [VCR documentation](https://github.com/vcr/vcr) for more information pertaining to VCR cassettes.
