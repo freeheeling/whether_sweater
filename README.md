@@ -28,7 +28,7 @@ The [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) is
 
 The database is comprised of a single resource type – `Users` – whose attributes are depicted by the following visual schema.
 
-![schema](https://user-images.githubusercontent.com/50811220/75908595-ab4db500-5e07-11ea-840d-caa7dd9bd21d.png)
+<img width="253" alt="schema" src="https://user-images.githubusercontent.com/50811220/76686961-9c40e100-6617-11ea-8c92-728e0c277731.png">
 
 ## Endpoints
 
