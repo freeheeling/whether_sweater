@@ -3,7 +3,9 @@
 ## Project Description
 Based on the premises of being a back-end developer working on a team that is building an application to plan road trips, this app allows users to view the current and forecasted weather at a destination.
 
-The Heroku-hosted [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) app utilizes the Ruby on Rails framework and [Fast JSON API](https://github.com/Netflix/fast_jsonapi) gem to expose aggregated data from multiple external APIs via a web-based API. [Project requirements](https://backend.turing.io/module3/projects/sweater_weather/requirements) provide an overview of the app's wireframes.
+The app utilizes the Ruby on Rails framework and [Fast JSON API](https://github.com/Netflix/fast_jsonapi) gem to expose aggregated data from multiple external APIs via a web-based API. [Project requirements](https://backend.turing.io/module3/projects/sweater_weather/requirements) provide an overview of the app's wireframes.
+
+The [Postman](https://www.postman.com/) platform may be utilized to test the API's responses, by sending a request to the Heroku-hosted [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) application server and receiving a response. Postman enables all HTTP methods and query parameters expected by the API to be entered and submitted, and then checks the response.
 
 ## Features
 - Exposes an API that aggregates data from multiple external APIs
