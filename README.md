@@ -1,19 +1,20 @@
 # Whether, Sweater? Sweater Weather
 
 ## Project Description
-Sweater Weather utilizes the Ruby on Rails framework and [Fast JSON API](https://github.com/Netflix/fast_jsonapi) gem to expose aggregated data from multiple external APIs via a web-based API.
-
 Based on the premises of being a back-end developer working on a team that is building an application to plan road trips, this app allows users to view the current weather as well as the forecasted weather at a destination.
 
-The [project requirements](https://backend.turing.io/module3/projects/sweater_weather/requirements) provide an overview of the application's wireframes.
-
-The [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) is hosted on Heroku.
+The Heroku-hosted [Sweater Wether Service](https://sweater-weather-service.herokuapp.com/) app utilizes the Ruby on Rails framework and [Fast JSON API](https://github.com/Netflix/fast_jsonapi) gem to expose aggregated data from multiple external APIs via a web-based API. [Project requirements](https://backend.turing.io/module3/projects/sweater_weather/requirements) provide an overview of the app's wireframes.
 
 ## Features
 - Exposes an API that aggregates data from multiple external APIs
 - Exposes an API that requires an authentication token
 - Exposes an API for CRUD functionality
 - Completes criteria based on the needs of other developers
+
+## APIs Used
+- Google Maps API
+- Dark Sky Weather API
+- Unsplash API
 
 ## Local Installation
 
@@ -34,15 +35,25 @@ The database is comprised of a single resource type – `Users` – whose attrib
 
 Data for all endpoints are exposed under an `api` and version (`v1`) namespace, the responses of which are returned in JSON format.
 
+### HTTP Headers
+
+To make a request with JSON, the appropriate HTTP headers should be:
+```
+Content-Type: application/json
+Accept: application/json
+```
+
 ### Application Landing Page
 
 #### Forecast endpoint
 
-Provide a location. A successful request returns geolocation details, current weather conditions and an hourly (next 8 hours) and daily forecast (next 5 days) for the requested location.
+Provide a location. A successful request returns geolocation details from the [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/start), and current weather conditions and an hourly (next 8 hours) and daily forecast (next 5 days) for the requested location from the [Dark Sky API](https://darksky.net/dev).
 
-Endpoint: `/forecast`
+| URI endpoint | HTTP method | Query Parameter |
+| :-----------:|:-----------:| :--------------:|
+| `/forecast`  | GET         | `location`      |
 
-Query Parameter:
+Query Parameter specifications:
 - `location`: comma-separated city and state (e.g., denver,co)
 
 Example request:
@@ -104,11 +115,13 @@ Example response:
 
 #### Background Image endpoint
 
-Provide a location. A successful request returns an image URL from the Unsplash API for the requested location.
+Provide a location. A successful request returns an image URL from the [Unsplash API](https://unsplash.com/developers) for the requested location.
 
-Endpoint: `/backgrounds`
+| URI endpoint    | HTTP method | Query Parameter |
+| :--------------:|:-----------:| :--------------:|
+| `/backgrounds`  | GET         | `location`      |
 
-Query Parameter:
+Query Parameter specifications:
 - `location`: comma-separated city and state (e.g., seattle,wa)
 
 Example request:
@@ -120,9 +133,11 @@ GET https://sweater-weather-service.herokuapp.com/api/v1/backgrounds?location=se
 
 Provide a valid and unique email address, password and matching password confirmation. A successful request creates a user in the database and generates and returns a unique API key associated with that user.
 
-Endpoint: `/users`
+| URI endpoint | HTTP method | Query Parameters                             |
+| :-----------:|:-----------:| :-------------------------------------------:|
+| `/users`     | POST        | `email`, `password`, `password_confirmation` |
 
-Query Parameters:
+Query Parameter specifications:
 - `email`: must be a valid type of address and unique within the database
 - `password`: must be at least 6 characters
 - `password_confirmation`: must match the provided password
@@ -142,9 +157,11 @@ POST https://sweater-weather-service.herokuapp.com/api/v1/users
 
 Provide email address and password for an existing user. A successful request returns the user’s API key.
 
-Endpoint: `/sessions`
+| URI endpoint | HTTP method | Query Parameters    |
+| :-----------:|:-----------:| :------------------:|
+| `/sessions`  | POST        | `email`, `password` |
 
-Query Parameters:
+Query Parameter specifications:
 - `email`: valid email address stored in database
 - `password`: must be associated with provided user email address
 
@@ -162,9 +179,11 @@ POST https://sweater-weather-service.herokuapp.com/api/v1/sessions
 
 Provide organ, destination and logged-in user's API key. A successful request returns the travel time, forecasted weather conditions and temperature upon arrival.
 
-Endpoint: `/road_trip`
+| URI endpoint | HTTP method | Query Parameters                   |
+| :-----------:|:-----------:| :---------------------------------:|
+| `/road_trip` | POST        | `origin`, `destination`, `api_key` |
 
-Query Parameters:
+Query Parameter specifications:
 - `origin`: comma-separated city and state (e.g., portland,or)
 - `destination`: comma-separated city and state (e.g., seattle,wa)
 - `api_key`: valid 24-character key, unique to user, received upon registration or login
@@ -182,14 +201,16 @@ POST https://sweater-weather-service.herokuapp.com/api/v1/road_trip
 
 ### Munchies Page endpoint
 
-Provide origin, destination and restaurant food category. A successful request returns the travel time, weather forecast and closest, open restaurant matching search criteria at destination upon arrival.
+Provide an origin, destination and food or cuisine type. A successful request returns the travel time, weather forecast and closest, open restaurant matching search criteria at destination upon arrival, using the [Google Directions API](https://developers.google.com/maps/documentation/directions/start), [Dark Sky API](https://darksky.net/dev) and [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3/get_started).
 
-Endpoint:  `/munchies`
+| URI endpoint | HTTP method | Query Parameters       |
+| :-----------:|:-----------:| :---------------------:|
+| `/munchies`  | GET         | `start`, `end`, `food` |
 
-Query Parameters:
+Query Parameter specifications:
 - `start`: comma-separated city and state (e.g., portland,or)
 - `end`: comma-separated city and state (e.g., seattle,wa)
-- `food`: restaurant food category (e.g., pho)
+- `food`: food or cuisine type (e.g., pho)
 
 Example request:
 ```
@@ -197,7 +218,8 @@ GET https://sweater-weather-service.herokuapp.com/api/v1/munchies?start=portland
 ```
 
 ## Requirements
-Environment variables and required API keys:
+
+### Environment variables and required API keys:
 * Dark Sky API key defined as `ENV['darksky_api_key']`
 * Google API key defined as `ENV['google_api_key']`
 * Unsplash API key defined as `ENV['unsplash_api_key']`
@@ -230,3 +252,6 @@ Run a single test file:
 ```
 $ bundle exec rspec <path-to-file>
 ```
+### Refreshing VCR Test Cassettes
+
+Errors will occassionally occur when testing with VCR. To refresh the cassettes being used, delete the cassettes directory within the spec folder and run `bundle exec rspec`. Reference the [VCR documentation](https://github.com/vcr/vcr) for more information pertaining to VCR cassettes.
