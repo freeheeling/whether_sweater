@@ -12,9 +12,11 @@ The Heroku-hosted [Sweater Wether Service](https://sweater-weather-service.herok
 - Completes criteria based on the needs of other developers
 
 ## APIs Used
-- Google Maps API
-- Dark Sky Weather API
-- Unsplash API
+- [Dark Sky API](https://darksky.net/dev)
+- [Google Directions API](https://developers.google.com/maps/documentation/directions/start)
+- [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/start)
+- [Unsplash API](https://unsplash.com/developers)
+- [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3/get_started)
 
 ## Local Installation
 
