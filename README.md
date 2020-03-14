@@ -24,33 +24,115 @@ The [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) is
 
 ## Database Composition
 
-The database is comprised of a single resource type – Users – whose attributes are depicted by the following visual schema.
+The database is comprised of a single resource type – `Users` – whose attributes are depicted by the following visual schema.
 
 ![schema](https://user-images.githubusercontent.com/50811220/75908595-ab4db500-5e07-11ea-840d-caa7dd9bd21d.png)
 
 ## Endpoints
 
-Data for all endpoints are exposed under an `api` and version (`v1`) namespace, returned in JSON format.
+Data for all endpoints are exposed under an `api` and version (`v1`) namespace, the responses of which are returned in JSON format.
 
 ### Application Landing Page
 
-#### 1a. Retrieve weather for a city
+#### Forecast endpoint
 
+Provide a location. A successful request returns geolocation details, current weather conditions and an hourly (next 8 hours) and daily forecast (next 5 days) for the requested location.
+
+Endpoint: `/forecast`
+
+Query Parameter:
+- `location`: comma-separated city and state (e.g., seattle,wa)
+
+Example request:
 ```
-GET /api/v1/forecast?location=denver,co
+GET https://sweater-weather-service.herokuapp.com/api/v1/forecast?location=seattle,wa
+```
+Example response:
+```
+{
+    "data": {
+        "id": null,
+        "type": "forecast",
+        "attributes": {
+            "search_location": {
+                "city": "Denver",
+                "state_abbrev": "CO",
+                "country": "United States"
+            },
+            "forecast": {
+                "current_weather": {
+                    "time_and_date": "2:43 PM, 3/14",
+                    "unix_timestamp": 1584197033,
+                    "weather_conditions": "Partly Cloudy",
+                    "weather_icon": "partly-cloudy-day",
+                    "temp_F": 34,
+                    "feels_like_F": 34,
+                    "humidity_percent": 76,
+                    "visibility_miles": 10,
+                    "uv_index_number": 1,
+                    "uv_exposure_level": "low",
+                    "today_summary": "Clear throughout the day.",
+                    "tonight_summary": "Clear"
+                },
+                "daily_forecast": [
+                    {
+                        "day_of_week": "Sunday",
+                        "unix_timestamp": 1584252000,
+                        "weather_icon": "partly-cloudy-day",
+                        "precip_type": "rain",
+                        "precip_probability_percent": 7,
+                        "high_temp_F": 63,
+                        "low_temp_F": 33
+                    },
+                    .
+                    .
+                    .
+                ],
+                "hourly_forecast": [
+                    {
+                        "hour_of_day": "2 PM",
+                        "unix_timestamp": 1584194400,
+                        "weather_icon": "partly-cloudy-day",
+                        "temp_F": 33
+                    },
+                    .
+                    .
+                    .
+                ]
+            }
+        }
+    }
+}
 ```
 
-#### 1b. Retrieve Background Image for a city
+#### Background Image endpoint
 
-```
-GET /api/v1/backgrounds?location=denver,co
-```
-- This will return the url to an appropriate background image for a location.
+Provide a location. A successful request returns an image URL from the Unsplash API for the requested location.
 
-### Registration Page
+Endpoint: `/backgrounds`
 
+Query Parameter:
+- `location`: comma-separated city and state (e.g., seattle,wa)
+
+Example request:
 ```
-POST /api/v1/users
+GET https://sweater-weather-service.herokuapp.com/api/v1/backgrounds?location=seattle,wa
+```
+
+### Registration Page endpoint
+
+Provide a valid and unique email address, password and matching password confirmation. A successful request creates a user in the database and generates and returns a unique API key associated with that user.
+
+Endpoint: `/users`
+
+Query Parameters:
+- `email`: must be a valid type of address and unique within the database
+- `password`: must be at least 6 characters
+- `password_confirmation`: must match the provided password
+
+Example request:
+```
+POST https://sweater-weather-service.herokuapp.com/api/v1/users
 
 {
   "email": "user@example.com",
@@ -58,12 +140,20 @@ POST /api/v1/users
   "password_confirmation": "password"
 }
 ```
-- A successful request creates a user and generates a unique api key associated with that user.
 
-### Login Page
+### Login Page endpoint
 
+Provide email address and password for an existing user. A successful request returns the user’s API key.
+
+Endpoint: `/sessions`
+
+Query Parameters:
+- `email`: valid email address stored in database
+- `password`: must be associated with provided user email address
+
+Example request:
 ```
-POST /api/v1/sessions
+POST https://sweater-weather-service.herokuapp.com/api/v1/sessions
 
 {
   "email": "user@example.com",
@@ -71,18 +161,42 @@ POST /api/v1/sessions
 }
 ```
 
-- A successful request returns the user’s api key.
+### Road Trip Page endpoint
 
-### Road Trip Page
+Provide organ, destination and logged-in user's API key. A successful request returns the travel time, forecasted weather conditions and temperature upon arrival.
 
+Endpoint: `/road_trip`
+
+Query Parameters:
+- `origin`: comma-separated city and state (e.g., portland,or)
+- `destination`: comma-separated city and state (e.g., seattle,wa)
+- `api_key`: valid 24-character key, unique to user, received upon registration or login
+
+Example request:
 ```
-POST /api/v1/road_trip
+POST https://sweater-weather-service.herokuapp.com/api/v1/road_trip
 
 {
-  "origin": "Denver,CO",
-  "destination": "Pueblo,CO",
+  "origin": "portland,or",
+  "destination": "seattle,wa",
   "api_key": "jgn983hy48thw9begh98h4539h4"
 }
+```
+
+### Munchies Page endpoint
+
+Provide origin, destination and restaurant food category. A successful request returns the travel time, weather forecast and closest, open restaurant matching search criteria at destination upon arrival.
+
+Endpoint:  `/munchies`
+
+Query Parameters:
+- `start`: comma-separated city and state (e.g., portland,or)
+- `end`: comma-separated city and state (e.g., seattle,wa)
+- `food`: restaurant food category (e.g., pho)
+
+Example request:
+```
+GET https://sweater-weather-service.herokuapp.com/api/v1/munchies?start=denver,co&end=durango,co&food=pizza
 ```
 
 ## Requirements
@@ -90,6 +204,7 @@ Environment variables and required API keys:
 * Dark Sky API key defined as `ENV['darksky_api_key']`
 * Google API key defined as `ENV['google_api_key']`
 * Unsplash API key defined as `ENV['unsplash_api_key']`
+* Yelp API key defined as `ENV['yelp_api_key']`
 
 ### Versions
 - Ruby 2.6.3
@@ -102,7 +217,9 @@ Environment variables and required API keys:
 * [pry](https://github.com/pry/pry)
 * [rspec](https://github.com/rspec/rspec)
 * [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
+#### Test Coverage
 * [simplecov](https://github.com/colszowka/simplecov)
+#### Response Caching
 * [vcr](https://github.com/vcr/vcr)
 * [webmock](https://github.com/bblimke/webmock)
 
