@@ -5,6 +5,8 @@ Sweater Weather utilizes the Ruby on Rails framework and [Fast JSON API](https:/
 
 Based on the premises of being a back-end developer working on a team that is building an application to plan road trips, this app allows users to view the current weather as well as the forecasted weather at a destination.
 
+The [project requirements](https://backend.turing.io/module3/projects/sweater_weather/requirements) provide an overview of the application's wireframes.
+
 The [Sweater Weather Service](https://sweater-weather-service.herokuapp.com/) is hosted on Heroku.
 
 ## Features
@@ -41,14 +43,14 @@ Provide a location. A successful request returns geolocation details, current we
 Endpoint: `/forecast`
 
 Query Parameter:
-- `location`: comma-separated city and state (e.g., seattle,wa)
+- `location`: comma-separated city and state (e.g., denver,co)
 
 Example request:
 ```
-GET https://sweater-weather-service.herokuapp.com/api/v1/forecast?location=seattle,wa
+GET https://sweater-weather-service.herokuapp.com/api/v1/forecast?location=denver,co
 ```
 Example response:
-```
+```json
 {
     "data": {
         "id": null,
@@ -83,10 +85,7 @@ Example response:
                         "precip_probability_percent": 7,
                         "high_temp_F": 63,
                         "low_temp_F": 33
-                    },
-                    .
-                    .
-                    .
+                    }, ...
                 ],
                 "hourly_forecast": [
                     {
@@ -94,10 +93,8 @@ Example response:
                         "unix_timestamp": 1584194400,
                         "weather_icon": "partly-cloudy-day",
                         "temp_F": 33
-                    },
-                    .
-                    .
-                    .
+                    }, ...
+                  
                 ]
             }
         }
@@ -196,7 +193,7 @@ Query Parameters:
 
 Example request:
 ```
-GET https://sweater-weather-service.herokuapp.com/api/v1/munchies?start=denver,co&end=durango,co&food=pizza
+GET https://sweater-weather-service.herokuapp.com/api/v1/munchies?start=portland,or&end=seattle,wa&food=pho
 ```
 
 ## Requirements
